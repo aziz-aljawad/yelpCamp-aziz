@@ -1,7 +1,8 @@
 
 var express = require('express');
 var router =express.Router();
-var Campground = require('../models/campground')
+var Campground = require('../models/campground');
+var middleware =require("../middleware");
 router.get('/',function(req,res)
 {
     //get all campground 
@@ -18,7 +19,7 @@ router.get('/',function(req,res)
         }
     });
 });
-router.post('/',isLoggedIn,function(req,res)
+router.post('/',middleware.isLoggedIn,function(req,res)
 {
     //get data from form and add campgrounds array
     var name = req.body.name;
@@ -43,7 +44,7 @@ router.post('/',isLoggedIn,function(req,res)
         }
     });
 });
-router.get('/new',isLoggedIn,function(req,res)
+router.get('/new',middleware.isLoggedIn,function(req,res)
 {
     res.render("campgrounds/new")
 })
@@ -63,11 +64,47 @@ router.get('/:id',function(req,res)
         }
     });
 });
-function isLoggedIn(req,res,next){
-    if(req.isAuthenticated()){
-        return next();
 
-    }
-     res.redirect('/login');
-}
+//EDIT CAMPGROUND ROUTE
+router.get("/:id/edit",middleware.checkCampgroundOwnership,function(req,res){
+    //check if user is loggedIn 
+
+        Campground.findById(req.params.id,function(err,foundCampground){
+           if (err) {
+               console.log(err);
+           } else {
+               res.render("campgrounds/edit",{campground:foundCampground});
+           }
+        });        
+
+});
+//UPDATE CAMPGROUND ROUTE
+router.put("/:id",middleware.checkCampgroundOwnership,function(req,res){
+
+    Campground.findByIdAndUpdate(req.params.id,req.body.campground,function(err,updatedCampground){
+        if (err) {
+             res.redirect('/campgrounds');      
+        } else {
+             res.redirect('/campgrounds/'+req.params.id);
+        }
+    })
+})
+
+
+//DESTROY CAMPGROUND ROUTE
+router.delete("/:id",middleware.checkCampgroundOwnership,function (req,res) {
+
+    Campground.findByIdAndRemove(req.params.id,(err)=>{
+        if (err) {
+            console.log(err);
+            res.redirect("/campgrounds");
+        } else {
+            res.redirect("/campgrounds");
+        }
+    });   
+
+});
+
+
+
 module.exports =router;
