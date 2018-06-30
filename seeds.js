@@ -5,18 +5,18 @@ var data =
 [
     {
         name: "Cloud's Rest",
-        image: "https://goo.gl/8cdZEY",
-        description: "blah blah blah  blah  blah  blah  blah  blah  blah  blah "
+        image: "https://drive.google.com/uc?id=1vJy3hWKlKPqMviXYnuOb56nS7fn2JN7q",
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac scelerisque enim. Suspendisse sed mi egestas, luctus diam et, elementum nulla. Aenean eget laoreet velit. Vestibulum quis venenatis tellus. Maecenas sagittis sit amet purus id egestas. Praesent scelerisque egestas felis, sed vestibulum ligula mattis quis. Etiam at ipsum odio. Curabitur laoreet purus ut tincidunt fermentum. In vitae iaculis quam, sed fermentum orci."
     },
     {
         name: "Desert Mesa",
         image: "https://drive.google.com/uc?id=1EJyuJLbeZZmTj2uo1Aiut63ZfWvH6QoC",
-        description: "blah blah blah  blah  blah  blah  blah  blah  blah  blah "
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac scelerisque enim. Suspendisse sed mi egestas, luctus diam et, elementum nulla. Aenean eget laoreet velit. Vestibulum quis venenatis tellus. Maecenas sagittis sit amet purus id egestas. Praesent scelerisque egestas felis, sed vestibulum ligula mattis quis. Etiam at ipsum odio. Curabitur laoreet purus ut tincidunt fermentum. In vitae iaculis quam, sed fermentum orci. "
     },
     {
         name: "Canyon Floor",
         image: "https://drive.google.com/uc?id=15s3YstoCmYJFkAxQYa06ivWCLwGHJ-vI",
-        description: "blah blah blah  blah  blah  blah  blah  blah  blah  blah "
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac scelerisque enim. Suspendisse sed mi egestas, luctus diam et, elementum nulla. Aenean eget laoreet velit. Vestibulum quis venenatis tellus. Maecenas sagittis sit amet purus id egestas. Praesent scelerisque egestas felis, sed vestibulum ligula mattis quis. Etiam at ipsum odio. Curabitur laoreet purus ut tincidunt fermentum. In vitae iaculis quam, sed fermentum orci."
     }
 ];
 

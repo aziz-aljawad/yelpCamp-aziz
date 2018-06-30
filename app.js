@@ -11,9 +11,10 @@ var Campground =require("./models/campground");
 var Comment = require("./models/comment");
 // var User = require("./models/user");
 //CONFIG
-mongoose.connect("mongodb://localhost/yelp_camp_v4");
+mongoose.connect("mongodb://localhost/yelp_camp_v5");
 app.use(bodyParser.urlencoded({extended:true}));
 app.set("view engine","ejs");
+app.use(express.static(__dirname + "/public"));
 seedDB();
 
 
