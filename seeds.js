@@ -23,38 +23,26 @@ var data =
 function seedDB()
 {
     //To Remove all campgrounds 
-    Campground.remove({}, function(err)
-    {
-        if(err)
-        {
+    Campground.remove({}, function(err){
+        if(err) {
             console.log(err);
         }
     console.log("remove campgrounds");
         //add a few campgrounds
-        data.forEach(function(seed)
-        {
-            Campground.create(seed,function(err,campground)
-            {
-                if(err)
-                {
+        data.forEach(function(seed){
+            Campground.create(seed,function(err,campground){
+                if(err){
                     console.log(err);
-                }
-                else
-                {
+                } else{
                     console.log("added a campground");
                     //comment creation
-                    Comment.create(
-                        {
+                    Comment.create({
                             text: "This Place is great, but I wish there was internet",
                             author: "Homer"
-                        },function(err,comment)
-                        {
-                            if (err)
-                            {
+                        },function(err,comment){
+                            if (err){
                                 console.log(err)
-                            }
-                            else
-                            {
+                            } else{
                                 campground.comments.push(comment);
                                 campground.save();
                                 console.log("Created  a new comment");
