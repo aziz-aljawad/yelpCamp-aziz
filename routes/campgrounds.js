@@ -18,7 +18,6 @@ router.get('/',function(req,res)
     //get all campground 
     Campground.find({},function (err,campgrounds)
     {
-        console.log(req.user);
         if (err) 
         {
             console.log(err);    
@@ -65,6 +64,7 @@ router.get('/new',middleware.isLoggedIn,function(req,res)
 {
     res.render("campgrounds/new")
 })
+//SHOW ROUTE
 router.get('/:id',function(req,res)
 {
     Campground.findById(req.params.id).populate("comments").exec(function(err,foundCampground)
@@ -75,7 +75,6 @@ router.get('/:id',function(req,res)
         }
         else
         {
-            console.log(foundCampground);
             res.render("campgrounds/show",{campground :foundCampground });
 
         }

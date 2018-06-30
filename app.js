@@ -22,7 +22,11 @@ var campgroundRoutes    =require('./routes/campgrounds');
 var indexRoutes                =require('./routes/index');
 
 //CONFIG
-mongoose.connect("mongodb://localhost/yelp_camp_v15");
+//local database
+//mongoose.connect("mongodb://localhost/yelp_camp_v16");
+var dburl = process.env.DATABASEURL || "mongodb://localhost/yelp_camp_v16"
+//cloud database
+mongoose.connect(dburl);
 app.use(bodyParser.urlencoded({extended:true}));
 app.set("view engine","ejs");
 app.use(express.static(__dirname + "/public"));
@@ -54,8 +58,5 @@ app.use(indexRoutes);
 app.use('/campgrounds',campgroundRoutes);
 app.use('/campgrounds/:id/comments',commentRoutes);
 
-const port = 12345
-app.listen(port,function()
-{
-    console.log(`connected to port ${port}`);    
-});
+app.listen(process.env.PORT);
+

@@ -8,6 +8,10 @@
 {
     padding: 0;
 }
+#desc-profile
+{
+    text-align: justify;
+}
 #small
 {
     width:260.5px;
