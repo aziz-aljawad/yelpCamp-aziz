@@ -22,7 +22,7 @@ var campgroundRoutes    =require('./routes/campgrounds');
 var indexRoutes                =require('./routes/index');
 
 //CONFIG
-mongoose.connect("mongodb://localhost/yelp_camp_v14");
+mongoose.connect("mongodb://localhost/yelp_camp_v15");
 app.use(bodyParser.urlencoded({extended:true}));
 app.set("view engine","ejs");
 app.use(express.static(__dirname + "/public"));
