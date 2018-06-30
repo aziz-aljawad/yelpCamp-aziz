@@ -30,16 +30,22 @@ router.post('/',isLoggedIn,function (req,res)
         //find a Campground by id
         Campground.findById(req.params.id,function(err,foundCampground)
         {
-            if (err){
+            if (err)
+            {
                 console.log(err);
                 res.redirect('/camgrounds');
-            } else{
+            }
+            else
+            {
                 console.log(req.body.comment);
                 Comment.create(req.body.comment,function (err,newComment)
                 {
-                    if (err){
+                    if (err)
+                    {
                         console.log(err);    
-                    } else{
+                    }
+                    else
+                    {
                         //add username and id to comment
                         newComment.author.id =req.user._id;
                         newComment.author.username =req.user.username;
