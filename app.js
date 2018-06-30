@@ -8,32 +8,16 @@ var seedDB =require("./seeds");
 
 //models
 var Campground =require("./models/campground");
-// var Comments = require("./models/comment");
+var Comment = require("./models/comment");
 // var User = require("./models/user");
 //CONFIG
-mongoose.connect("mongodb://localhost/yelp_camp");
+mongoose.connect("mongodb://localhost/yelp_camp_v4");
 app.use(bodyParser.urlencoded({extended:true}));
 app.set("view engine","ejs");
 seedDB();
 
 
-// Campground.create(   
-//     {
-//         name: "lion's rest",
-//         image: "https://farm4.staticflickr.com/3872/14435096036_39db8f04bc.jpg",
-//         description: "This camp is natural habitat for many animals around the world weather is cool all year long"
-//     },
-//     function(error,campground)
-//     {
-//         if (error) 
-//         {
-//             console.log(error);    
-//         }
-//         else
-//         {
-//             console.log("Successfully created:- \n"+campground )
-//         }
-//     });
+
 
 
 app.get('/',function(req,res)
@@ -51,7 +35,7 @@ app.get('/campgrounds',function(req,res)
         }
         else
         {
-            res.render('index',{campgrounds: campgrounds});
+            res.render('campgrounds/index',{campgrounds: campgrounds});
         }
     });
 });
@@ -79,7 +63,7 @@ app.post('/campgrounds',function(req,res)
 });
 app.get('/campgrounds/new',function(req,res)
 {
-    res.render("new.ejs")
+    res.render("campgrounds/new")
 })
 app.get('/campgrounds/:id',function(req,res)
 {
@@ -92,11 +76,69 @@ app.get('/campgrounds/:id',function(req,res)
         else
         {
             console.log(foundCampground);
-            res.render("show",{campground :foundCampground });
+            res.render("campgrounds/show",{campground :foundCampground });
 
         }
     });
 });
+
+
+//=============================//
+//    COMMENTS ROUTES          //
+//=============================//
+
+app.get('/campgrounds/:id/comments/new',function(req,res)
+{
+    //find a Campground by id
+    Campground.findById(req.params.id,function (err,foundCampground)
+    {
+        if (err)
+        {
+            console.log(err);    
+        }
+        else
+        {
+            res.render("comments/new.ejs",{campground: foundCampground});
+            
+        }
+    }); 
+
+});
+
+app.post('/campgrounds/:id/comments',function (req,res)
+{
+        //find a Campground by id
+        Campground.findById(req.params.id,function(err,foundCampground)
+        {
+            if (err)
+            {
+                console.log(err);
+                res.redirect('/camgrounds');
+            }
+            else
+            {
+                console.log(req.body.comment);
+                Comment.create(req.body.comment,function (err,newComment)
+                {
+                    if (err)
+                    {
+                        console.log(err);    
+                    }
+                    else
+                    {
+                        foundCampground.comments.push(newComment);
+                        foundCampground.save();
+                        //campground
+                         res.redirect('/campgrounds/'+foundCampground._id);
+                    }
+                })
+            }
+        })
+        //create new comment
+        //connect a new comment to campground
+        //redirect to campground/:id
+});
+
 const port = 12345
 app.listen(port,function()
 {
