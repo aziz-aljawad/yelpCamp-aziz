@@ -22,7 +22,7 @@ var campgroundRoutes    =require('./routes/campgrounds');
 var indexRoutes                =require('./routes/index');
 
 //CONFIG
-mongoose.connect("mongodb://localhost/yelp_camp_v13");
+mongoose.connect("mongodb://localhost/yelp_camp_v14");
 app.use(bodyParser.urlencoded({extended:true}));
 app.set("view engine","ejs");
 app.use(express.static(__dirname + "/public"));
@@ -30,6 +30,7 @@ app.use(methodOverride("_method"));
 app.use(flash());
 // seedDB();
 
+app.locals.moment = require('moment');
 //PASSPORT CONFIG
 app.use(require('express-session')({
     secret: "rusty is dog that every cat hate",
